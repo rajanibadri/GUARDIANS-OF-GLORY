@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +9,7 @@ public class SceneLoader : MonoBehaviour
      [SerializeField] GameObject SettingsPanel;
       [SerializeField] GameObject MainMenuPanel;
      public string playerName;
+   public  bool isCameraShake;
     // Start is called before the first frame update
     void Awake(){
         if(instance==null)
@@ -55,5 +55,13 @@ public class SceneLoader : MonoBehaviour
     {
        MainMenuPanel.SetActive(true);
        SettingsPanel.SetActive(false);
+    }
+    public void CameraShakeOn()
+    {
+       isCameraShake=true;
+    }
+    public void CameraShakeOFF()
+    {
+      isCameraShake=false;
     }
 }

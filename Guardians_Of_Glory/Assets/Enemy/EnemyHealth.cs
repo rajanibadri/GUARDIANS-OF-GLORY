@@ -14,10 +14,13 @@ public class EnemyHealth : MonoBehaviour
     Enemy enemy;
     private float timer = 0f;
     private int interval = 15;
+     int previousnumber=1;
+     int currentnumber=2;
     UIManager uIManager;
+    CameraShake cameraShakeEffect;
+    SceneLoader sceneLoader;
     Vector3 tranform;
-    public int previousnumber=1;
-    public int currentnumber=2;
+    
     Timer displayTime;
 
     // Start is called before the first frame update
@@ -25,14 +28,12 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHitPoints = maxHitPoints;
     }
-    void Start()
-    {
-       
-    }
     void Awake()
     {   displayTime=FindObjectOfType<Timer>();
         enemy = GetComponent<Enemy>();
         uIManager=FindObjectOfType<UIManager>();
+         cameraShakeEffect=FindObjectOfType<CameraShake>();
+         sceneLoader=FindObjectOfType<SceneLoader>();
     }
 
     // Update is called once per frame
@@ -63,6 +64,10 @@ public class EnemyHealth : MonoBehaviour
             enemy.Reward();   
             GameObject part = Instantiate(ExplosionPart, transform.position+new Vector3(0,transform.position.y+1,0), Quaternion.identity);
             gameObject.SetActive(false);
+               if(sceneLoader.isCameraShake==true)
+            {
+                 cameraShakeEffect.TriggerCameraShake();
+            }
             uIManager.ScoreIncrement();
             Destroy(part, 1f);
 
